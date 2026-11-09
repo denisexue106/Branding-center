@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branding Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------------------------
+   Design tokens — pulled from the Branding Center Figma file
+   (Keap design system variables)
+   --------------------------------------------------------------- */
+:root{
+  /* brand */
+  --primary-nav:#151B22;
+  --paper:#FFFFFF;
+  --green:#36A635;
+  --success:#2A942A;
+  --green-050:#E8F6E8;
+  --red-800:#E02500;
+
+  /* interaction */
+  --button-filled-bg:#006CEB;
+  --button-filled-text:#FFFFFF;
+  --link:#006CEB;
+  --link-hover:#0060D1;
+
+  /* neutrals */
+  --gray-050:#FAFAFA;
+  --gray-100:#F0F0F0;
+  --gray-600:#B5B5B5;
+  --gray-800:#656565;
+  --gray-900:#2C2C2C;
+
+  /* text */
+  --text-high-contrast:#000000;
+  --text-normal:rgba(0,0,0,.82);
+  --text-subtle:rgba(0,0,0,.60);
+  --ink-700:rgba(0,0,0,.40);
+  --divider-color:rgba(0,0,0,.09);
+
+  /* type scale */
+  --fs-xs:12px; --fs-sm:14px; --fs-md:16px; --fs-lg:18px; --fs-xl:20px; --fs-xxxl:32px;
+  --lh-sm:16px; --lh-md:20px; --lh-lg:24px; --lh-xxl:40px;
+  --fw-regular:400; --fw-medium:500; --fw-semibold:600;
+
+  /* "Sul Sans" is the Keap brand face; it is not web-hosted, so this
+     prototype falls back to the closest widely available grotesks. */
+  --font-default:"Sul Sans","Helvetica Neue",Helvetica,Arial,
+                 system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  /* elevation */
+  --z1:0 1px 3px rgba(0,0,0,.20), 0 2px 1px -1px rgba(0,0,0,.12), 0 1px 1px rgba(0,0,0,.14);
+  --z6:0 3px 5px -1px rgba(0,0,0,.20), 0 1px 18px rgba(0,0,0,.12), 0 6px 10px rgba(0,0,0,.14);
+
+  --nav-w:100px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-default);
+  font-size:var(--fs-sm);
+  line-height:var(--lh-md);
+  color:var(--text-normal);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+h1,h2,h3,h4,p{margin:0}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover)}
+:focus-visible{outline:2px solid var(--button-filled-bg);outline-offset:2px;border-radius:3px}
+
+.app{display:flex;min-height:100vh}
+
+/* ---------------------------------------------------------------
+   Primary nav
+   --------------------------------------------------------------- */
+.primary-nav{
+  width:var(--nav-w);flex:0 0 var(--nav-w);
+  background:var(--primary-nav);
+  color:#fff;
+  display:flex;flex-direction:column;align-items:center;
+  padding:24px 0 16px;
+  position:sticky;top:0;height:100vh;
+  z-index:30;
+}
+.nav-logo{width:28px;height:30px;margin-bottom:22px}
+.nav-items{display:flex;flex-direction:column;align-items:stretch;width:100%;gap:2px}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:9px 2px;color:rgba(255,255,255,.92);
+  font-size:11px;line-height:14px;letter-spacing:.1px;
+  transition:background .12s ease;
+}
+.nav-item svg{width:22px;height:22px;display:block}
+.nav-item:hover{background:rgba(255,255,255,.08)}
+.nav-item[aria-current="page"]{background:rgba(255,255,255,.12)}
+.nav-spacer{flex:1}
+.nav-bottom{display:flex;flex-direction:column;align-items:center;gap:18px}
+.nav-help{opacity:.9}
+.nav-help svg{width:24px;height:24px;display:block}
+.avatar{
+  position:relative;width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(145deg,#f0a868,#b5643c);
+  display:grid;place-items:center;font-size:15px;
+  border:2px solid rgba(255,255,255,.25);
+}
+.avatar .badge{
+  position:absolute;top:-3px;right:-5px;background:var(--red-800);color:#fff;
+  font-size:10px;font-weight:700;line-height:1;border-radius:9px;padding:3px 4px;
+  border:2px solid var(--primary-nav);
+}
+.fab{
+  position:absolute;top:56px;left:calc(var(--nav-w) - 24px);
+  width:48px;height:48px;border-radius:50%;
+  background:var(--paper);box-shadow:var(--z1);
+  display:grid;place-items:center;color:var(--green);
+  z-index:40;transition:transform .12s ease;
+}
+.fab:hover{transform:scale(1.06)}
+.fab svg{width:22px;height:22px}
+
+/* ---------------------------------------------------------------
+   Page shell
+   --------------------------------------------------------------- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.page{
+  flex:1;
+  padding:30px 124px 64px 138px;  /* content starts at x=238 of a 1512 frame */
+  max-width:1512px;
+}
+.page-head{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.back{
+  width:28px;height:28px;display:grid;place-items:center;border-radius:4px;
+  color:var(--text-high-contrast);
+}
+.back:hover{background:var(--gray-100)}
+.back svg{width:22px;height:22px}
+.page-title{
+  font-size:30px;line-height:var(--lh-xxl);font-weight:var(--fw-regular);
+  color:var(--text-high-contrast);letter-spacing:-.2px;
+}
+
+/* tabs */
+.tabs{
+  display:flex;gap:8px;
+  border-bottom:1px solid var(--divider-color);
+  margin-bottom:34px;
+}
+.tab{
+  padding:8px 10px 12px;
+  font-size:15px;line-height:20px;color:var(--text-normal);
+  border-bottom:3px solid transparent;margin-bottom:-1px;
+  transition:color .12s ease,border-color .12s ease;
+}
+.tab:hover{color:var(--text-high-contrast)}
+.tab[aria-selected="true"]{
+  color:var(--text-high-contrast);font-weight:var(--fw-semibold);
+  border-bottom-color:var(--green);
+}
+.panel[hidden]{display:none}
+
+/* shared bits */
+.section + .section{margin-top:40px}
+.section-title{
+  font-size:var(--fs-xl);line-height:var(--lh-lg);font-weight:var(--fw-regular);
+  color:var(--text-high-contrast);margin-bottom:6px;
+}
+.section-copy{
+  font-size:var(--fs-sm);line-height:var(--lh-md);color:var(--text-normal);
+  max-width:640px;margin-bottom:18px;
+}
+.sub-title{
+  font-size:var(--fs-md);line-height:var(--lh-lg);font-weight:var(--fw-semibold);
+  color:var(--text-high-contrast);margin-bottom:14px;
+}
+.rule{height:1px;background:var(--divider-color);margin:26px 0}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:40px;padding:0 16px;border-radius:4px;
+  font-size:var(--fs-sm);font-weight:var(--fw-semibold);line-height:var(--lh-sm);
+  transition:background .12s ease,box-shadow .12s ease;
+}
+.btn-filled{background:var(--button-filled-bg);color:var(--button-filled-text)}
+.btn-filled:hover{background:#0060D1}
+.btn-text{color:var(--link);padding:0 8px}
+.btn-text:hover{background:rgba(0,108,235,.07)}
+
+/* text field */
+.field{position:relative;display:inline-block;width:296px}
+.field input,.field select{
+  width:100%;height:40px;padding:0 36px 0 12px;
+  border:1px solid var(--gray-600);border-radius:4px;background:var(--paper);
+  font-size:var(--fs-sm);color:var(--text-high-contrast);
+  appearance:none;
+}
+.field input::placeholder{color:var(--ink-700)}
+.field label{
+  position:absolute;top:-7px;left:9px;padding:0 4px;background:var(--paper);
+  font-size:var(--fs-xs);line-height:14px;color:var(--text-subtle);
+  pointer-events:none;
+}
+.field:focus-within label{color:var(--link)}
+.field:focus-within input,.field:focus-within select{
+  border-color:var(--link);box-shadow:inset 0 0 0 1px var(--link);outline:none;
+}
+.field .caret{
+  position:absolute;right:11px;top:50%;transform:translateY(-50%);
+  pointer-events:none;color:var(--gray-800);
+}
+.field .caret svg{width:16px;height:16px;display:block}
+.field-wide{width:442px}
+.field-sm{width:186px}
+
+/* autocomplete */
+.combo{position:relative}
+.combo-list{
+  position:absolute;left:0;right:0;top:calc(100% + 4px);
+  background:var(--paper);border-radius:4px;box-shadow:var(--z6);
+  max-height:232px;overflow:auto;z-index:20;padding:4px 0;
+}
+.combo-list[hidden]{display:none}
+.combo-option{
+  display:block;width:100%;text-align:left;padding:9px 14px;
+  font-size:var(--fs-md);line-height:var(--lh-lg);color:var(--text-high-contrast);
+}
+.combo-option:hover,.combo-option.is-active{background:var(--gray-100)}
+.combo-option[aria-selected="true"]{font-weight:var(--fw-semibold)}
+.combo-empty{padding:12px 14px;color:var(--text-subtle)}
+
+/* ---------------------------------------------------------------
+   Branding tab — logos
+   --------------------------------------------------------------- */
+.logo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,251px));gap:10px}
+.logo-tile{
+  position:relative;height:168px;border-radius:8px;background:var(--gray-100);
+  display:grid;place-items:center;overflow:hidden;cursor:pointer;
+  transition:box-shadow .14s ease;
+}
+.logo-tile:hover{box-shadow:0 0 0 2px var(--green) inset}
+.logo-tile img{max-width:72%;max-height:60%;object-fit:contain}
+.wordmark{
+  font-family:var(--font-default);font-weight:800;font-size:58px;line-height:1;
+  letter-spacing:-3px;user-select:none;
+}
+.logo-tile .tag{
+  position:absolute;top:12px;left:12px;
+  background:var(--green-050);color:var(--success);
+  font-size:var(--fs-xs);line-height:16px;font-weight:var(--fw-medium);
+  padding:3px 10px;border-radius:12px;
+}
+.logo-tile .make-primary{
+  position:absolute;inset:auto 0 0 0;padding:7px;
+  background:rgba(0,0,0,.72);color:#fff;font-size:var(--fs-xs);font-weight:600;
+  opacity:0;transition:opacity .14s ease;
+}
+.logo-tile:hover .make-primary{opacity:1}
+.logo-tile.is-primary .make-primary{display:none}
+.logo-tile .remove{
+  position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.92);color:var(--red-800);
+  display:grid;place-items:center;opacity:0;transition:opacity .14s ease;
+}
+.logo-tile:hover .remove{opacity:1}
+.logo-tile .remove svg{width:16px;height:16px}
+
+.dropzone{
+  height:168px;border:1px dashed var(--gray-600);border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;text-align:center;padding:12px;cursor:pointer;
+  transition:border-color .14s ease,background .14s ease;
+}
+.dropzone:hover,.dropzone.is-over{border-color:var(--link);background:rgba(0,108,235,.04)}
+.dropzone svg{width:34px;height:34px;color:var(--gray-800);margin-bottom:4px}
+.dropzone .dz-title{
+  font-size:var(--fs-md);font-weight:var(--fw-semibold);color:var(--text-high-contrast);
+}
+.dropzone .dz-link{color:var(--link);font-size:var(--fs-sm)}
+.dropzone .dz-hint{font-size:var(--fs-xs);color:var(--text-subtle)}
+
+/* ---------------------------------------------------------------
+   Branding tab — colors
+   --------------------------------------------------------------- */
+.swatch-grid{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+.swatch{
+  position:relative;width:166px;height:120px;border-radius:8px;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;
+  cursor:pointer;overflow:hidden;
+}
+.swatch .hex{
+  font-size:var(--fs-sm);line-height:var(--lh-md);font-weight:var(--fw-medium);
+  font-variant-numeric:tabular-nums;
+}
+.swatch .trash{
+  position:absolute;top:10px;right:12px;color:var(--red-800);
+  opacity:0;transition:opacity .14s ease;
+  width:24px;height:24px;display:grid;place-items:center;
+}
+.swatch:hover .trash{opacity:1}
+.swatch .trash svg{width:19px;height:19px}
+.swatch .copied{
+  position:absolute;inset:0;display:grid;place-items:center;
+  background:rgba(0,0,0,.64);color:#fff;font-weight:600;font-size:13px;
+  opacity:0;transition:opacity .14s ease;pointer-events:none;
+}
+.swatch.is-copied .copied{opacity:1}
+.add-color{
+  width:159px;height:117px;border:1px dashed var(--gray-600);border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;text-align:center;padding:10px;
+  transition:border-color .14s ease,background .14s ease;
+}
+.add-color:hover{border-color:var(--link);background:rgba(0,108,235,.04)}
+.add-color svg{width:22px;height:22px;color:var(--gray-800)}
+.add-color .ac-title{
+  font-size:var(--fs-md);font-weight:var(--fw-semibold);color:var(--text-high-contrast);
+  margin-top:4px;
+}
+.add-color .ac-hint{font-size:var(--fs-xs);line-height:15px;color:var(--text-subtle);max-width:120px}
+.visually-hidden{
+  position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+  clip-path:inset(50%);white-space:nowrap;
+}
+
+/* ---------------------------------------------------------------
+   Style guide tab
+   --------------------------------------------------------------- */
+.styleguide{display:grid;grid-template-columns:minmax(0,533px) minmax(0,1fr);gap:32px}
+.sg-form{padding-right:8px}
+.sg-colors{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;max-width:460px}
+.sg-color-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sg-color-row span{font-size:var(--fs-sm);color:var(--text-normal)}
+.color-chip{
+  width:28px;height:28px;border-radius:4px;border:1px solid rgba(0,0,0,.22);
+  flex:0 0 28px;cursor:pointer;padding:0;
+  transition:transform .1s ease;
+}
+.color-chip:hover{transform:scale(1.08)}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{
+  height:36px;padding:0 14px;border-radius:6px;
+  border:1px solid #D0D0D0;background:var(--paper);
+  font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--text-high-contrast);
+  display:inline-flex;align-items:center;
+  transition:border-color .12s ease,color .12s ease,background .12s ease;
+}
+.chip:hover{border-color:var(--gray-800)}
+.chip[aria-pressed="true"]{border-color:var(--success);color:var(--success);background:var(--paper)}
+
+.row{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.icon-toggle{
+  width:36px;height:36px;border:1px solid #D0D0D0;border-radius:6px;
+  display:grid;place-items:center;color:var(--text-high-contrast);
+  transition:border-color .12s ease,color .12s ease;
+}
+.icon-toggle:hover{border-color:var(--gray-800)}
+.icon-toggle[aria-pressed="true"]{border-color:var(--success);color:var(--success)}
+.icon-toggle svg{width:18px;height:18px}
+
+.check{display:flex;align-items:center;gap:10px;margin-bottom:12px;cursor:pointer}
+.check input{
+  appearance:none;width:18px;height:18px;border:2px solid var(--gray-800);
+  border-radius:2px;flex:0 0 18px;display:grid;place-items:center;cursor:pointer;
+  transition:background .12s ease,border-color .12s ease;
+}
+.check input:checked{background:var(--success);border-color:var(--success)}
+.check input:checked::after{
+  content:"";width:10px;height:5px;border:2px solid #fff;border-top:0;border-right:0;
+  transform:rotate(-45deg) translate(1px,-1px);
+}
+.check span{font-size:var(--fs-sm);color:var(--text-normal)}
+
+/* preview panel */
+.sg-preview{background:var(--gray-050);margin:-30px -124px -64px 0;padding:30px 32px 64px}
+.sg-preview-title{
+  font-size:var(--fs-xl);line-height:var(--lh-lg);color:var(--text-high-contrast);
+  margin-bottom:24px;
+}
+.preview-card{background:var(--gray-100);border-radius:8px;padding:28px 32px 36px}
+.pv-head{
+  font-size:var(--fs-md);font-weight:var(--fw-medium);color:var(--text-high-contrast);
+  padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,.14);margin-bottom:20px;
+}
+.pv-head + .pv-head{margin-top:0}
+.pv-group + .pv-group{margin-top:30px}
+.pv-colors{display:flex;gap:46px;flex-wrap:wrap}
+.pv-color-label{font-size:var(--fs-sm);color:var(--text-normal);margin-bottom:8px}
+.pv-swatch{
+  width:100px;height:80px;border-radius:6px;display:grid;place-items:center;
+  font-size:13px;font-weight:var(--fw-medium);font-variant-numeric:tabular-nums;
+  border:1px solid rgba(0,0,0,.14);
+}
+.pv-text{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);gap:40px}
+.pv-h1{font-size:var(--fs-xxxl);line-height:40px;margin-bottom:14px}
+.pv-h2{font-size:24px;line-height:32px;margin-bottom:12px}
+.pv-h3{font-size:var(--fs-lg);line-height:26px;margin-bottom:10px}
+.pv-h4{font-size:var(--fs-md);line-height:24px}
+.pv-body{font-size:15px;line-height:24px}
+.pv-buttons{display:flex;gap:44px}
+.pv-btn-col{min-width:140px}
+.pv-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:40px;padding:0 24px;border-radius:4px;
+  font-size:var(--fs-sm);font-weight:var(--fw-semibold);min-width:160px;
+}
+.pv-btn.primary{background:var(--green);color:#fff}
+.pv-btn.secondary{border:1px solid var(--green);color:var(--green);background:var(--paper)}
+.pv-btn.tertiary{color:var(--green);min-width:0;padding:0}
+
+/* ---------------------------------------------------------------
+   Synced block tab
+   --------------------------------------------------------------- */
+.sb-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.sb-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0 24px}
+.search{position:relative;width:364px}
+.search input{
+  width:100%;height:40px;padding:0 14px 0 42px;
+  border:1px solid var(--gray-600);border-radius:20px;background:var(--paper);
+  font-size:var(--fs-sm);
+}
+.search input::placeholder{color:var(--text-subtle)}
+.search input:focus{border-color:var(--link);outline:none;box-shadow:inset 0 0 0 1px var(--link)}
+.search svg{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;color:var(--gray-800);pointer-events:none;
+}
+.filter-btn{display:inline-flex;align-items:center;gap:8px;color:var(--link);font-weight:var(--fw-semibold)}
+.filter-btn svg{width:17px;height:17px}
+
+.sb-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 13px}
+.sb-card{
+  background:var(--paper);border-radius:6px;box-shadow:var(--z1);overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.sb-card-head{display:flex;align-items:flex-start;gap:12px;padding:14px 14px 12px}
+.sb-card-head .meta{flex:1;min-width:0}
+.sb-card-head h3{
+  font-size:var(--fs-md);line-height:22px;font-weight:var(--fw-medium);
+  color:var(--text-high-contrast);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.sb-card-head p{font-size:var(--fs-sm);line-height:20px;color:var(--text-subtle)}
+.kebab{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  color:var(--gray-800);flex:0 0 28px;
+}
+.kebab:hover{background:var(--gray-100)}
+.kebab svg{width:18px;height:18px}
+.menu{
+  position:absolute;right:10px;top:46px;min-width:168px;z-index:15;
+  background:var(--paper);border-radius:4px;box-shadow:var(--z6);padding:6px 0;
+}
+.menu[hidden]{display:none}
+.menu button{display:block;width:100%;text-align:left;padding:9px 16px;font-size:var(--fs-sm)}
+.menu button:hover{background:var(--gray-100)}
+.menu button.danger{color:var(--red-800)}
+
+.sb-thumb{position:relative;height:140px;overflow:hidden;background:var(--gray-100)}
+.sb-thumb .art{position:absolute;inset:0}
+.sb-overlay{
+  position:absolute;inset:0;background:rgba(190,190,190,.86);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  opacity:0;transition:opacity .14s ease;
+}
+.sb-card:hover .sb-overlay,.sb-card:focus-within .sb-overlay{opacity:1}
+.sb-overlay .preview-link{
+  display:inline-flex;align-items:center;gap:7px;color:var(--link);font-weight:var(--fw-semibold);
+}
+.sb-overlay .preview-link svg{width:17px;height:17px}
+
+.pager{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:34px}
+.pager button{
+  min-width:34px;height:34px;border-radius:4px;display:grid;place-items:center;
+  font-size:var(--fs-sm);color:var(--text-high-contrast);
+}
+.pager button:hover:not([aria-current="page"]){background:var(--gray-100)}
+.pager button[aria-current="page"]{background:var(--gray-900);color:#fff;font-weight:var(--fw-semibold)}
+.pager button[disabled]{color:var(--gray-600);cursor:default}
+.pager svg{width:18px;height:18px}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:48px 0;color:var(--text-subtle);
+}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);
+  background:var(--gray-900);color:#fff;font-size:var(--fs-sm);font-weight:500;
+  padding:11px 18px;border-radius:4px;box-shadow:var(--z6);
+  opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:60;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1240px){
+  .page{padding:24px 32px 56px}
+  .styleguide{grid-template-columns:1fr}
+  .sg-preview{margin:0;border-radius:8px;padding:24px}
+  .logo-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+}
+@media (max-width:820px){
+  .sb-grid{grid-template-columns:1fr}
+  .pv-text{grid-template-columns:1fr}
+  .pv-colors{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- =========================== PRIMARY NAV =========================== -->
+  <nav class="primary-nav" aria-label="Primary">
+    <svg class="nav-logo" viewBox="0 0 28 30" fill="none" aria-label="Keap">
+      <path d="M5.6 1.2h4.3v13.4L18.4 7h5.9l-8.8 7.8L24.6 29h-5.2l-6.6-9.9-2.9 2.6V29H5.6V1.2Z" fill="#36A635"/>
+    </svg>
+
+    <div class="nav-items">
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>Search</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9.6V20h13V9.6"/><path d="M9.8 20v-5.4h4.4V20"/></svg>Home</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9.5" cy="8" r="3.4"/><path d="M3.6 19c0-3.3 2.6-5.6 5.9-5.6s5.9 2.3 5.9 5.6"/><path d="M16.5 5.4a3 3 0 0 1 0 5.6"/><path d="M18.2 13.9c1.5.8 2.4 2.3 2.4 4.1"/></svg>Contacts</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 9.8h17M8 3.4v3.2M16 3.4v3.2"/></svg>My day</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 11.6c0 3.9-3.8 7-8.5 7-1 0-2-.1-2.9-.4L4 20.4l1.4-3.6A6.6 6.6 0 0 1 3.5 11.6c0-3.9 3.8-7 8.5-7s8.5 3.1 8.5 7Z"/></svg>Comms</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3.6v16.8"/><path d="M15.8 7.2c-.6-1.3-2-2-3.8-2-2.3 0-3.9 1.1-3.9 2.9 0 4 7.8 2.2 7.8 6.4 0 1.9-1.8 3.1-4 3.1-2 0-3.5-.8-4.1-2.3"/></svg>Sales</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 9.6v4.8a1.6 1.6 0 0 0 1.6 1.6H8l7.6 4V5.6L8 9.6H5.6A1.6 1.6 0 0 0 4 11.2Z"/><path d="M18.6 9.4a4 4 0 0 1 0 5.2"/></svg>Marketing</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13.4 3 5 13.4h5.4L9.8 21l8.6-10.4H13l.4-7.6Z"/></svg>Automation</button>
+      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5.5 19V11M12 19V5M18.5 19v-5.6"/></svg>Reports</button>
+    </div>
+
+    <div class="nav-spacer"></div>
+    <div class="nav-bottom">
+      <button class="nav-help" aria-label="Help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.6"/><path d="M9.7 9.5c.2-1.2 1.1-2 2.4-2 1.4 0 2.4.8 2.4 2 0 1.9-2.4 1.7-2.4 3.6"/><circle cx="12.1" cy="16.4" r=".9" fill="currentColor" stroke="none"/></svg>
+      </button>
+      <div class="avatar" title="Denise">🙂<span class="badge">9+</span></div>
+    </div>
+  </nav>
+
+  <button class="fab" aria-label="Create new">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5.5v13M5.5 12h13"/></svg>
+  </button>
+
+  <!-- ============================== MAIN ============================== -->
+  <div class="main">
+    <main class="page">
+      <div class="page-head">
+        <button class="back" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5.5M11 5.5 4.5 12l6.5 6.5"/></svg>
+        </button>
+        <h1 class="page-title">Branding Center</h1>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Branding Center sections">
+        <button class="tab" role="tab" id="tab-branding" aria-controls="panel-branding" aria-selected="true">Branding</button>
+        <button class="tab" role="tab" id="tab-styleguide" aria-controls="panel-styleguide" aria-selected="false">Style guide</button>
+        <button class="tab" role="tab" id="tab-synced" aria-controls="panel-synced" aria-selected="false">Synced block</button>
+      </div>
+
+      <!-- ---------------------------- BRANDING ---------------------------- -->
+      <section class="panel" id="panel-branding" role="tabpanel" aria-labelledby="tab-branding">
+
+        <div class="section">
+          <h2 class="section-title">Logos</h2>
+          <p class="section-copy">Your can upload multiple logos but the primary logo will appear when you create quotes, invoices, automations, emails, landing pages, and more. Logo should be at least 300px X 300px.</p>
+          <div class="logo-grid" id="logoGrid">
+            <!-- logo tiles injected -->
+            <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload logo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6.6 17.5a3.9 3.9 0 0 1-.5-7.8 5.2 5.2 0 0 1 10-1.6 3.6 3.6 0 0 1 1.3 7"/>
+                <path d="M12 20.5v-8M9 15.2l3-3 3 3"/>
+              </svg>
+              <span class="dz-title">Upload logo</span>
+              <span class="dz-link">Drag &amp; drop here or browse</span>
+              <span class="dz-hint">jpeg, png, tiff files are acceptable</span>
+            </div>
+            <input type="file" id="logoInput" class="visually-hidden" accept="image/png,image/jpeg,image/tiff">
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Colors</h2>
+          <p class="section-copy">Add your branding colors here to help you build your landing pages, emails easier and quicker.</p>
+          <div class="swatch-grid" id="swatchGrid">
+            <!-- swatches injected -->
+            <button class="add-color" id="addColorBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15.6 4.3 4.1 4.1-9 9-4.9.8.8-4.9 9-9Z"/><path d="m13.9 6 4.1 4.1"/>
+              </svg>
+              <span class="ac-title">Add Color</span>
+              <span class="ac-hint">Click here to add your branding color</span>
+            </button>
+            <input type="color" id="colorInput" class="visually-hidden" value="#36A635">
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Fonts</h2>
+          <p class="section-copy">Add your branding fonts here to customize your emails and landing pages.</p>
+          <div class="field combo" id="brandFontCombo">
+            <label for="brandFont">Font family</label>
+            <input id="brandFont" type="text" role="combobox" aria-expanded="false"
+                   aria-controls="brandFontList" aria-autocomplete="list"
+                   placeholder="Select your font family" autocomplete="off">
+            <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+            <div class="combo-list" id="brandFontList" role="listbox" hidden></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --------------------------- STYLE GUIDE --------------------------- -->
+      <section class="panel" id="panel-styleguide" role="tabpanel" aria-labelledby="tab-styleguide" hidden>
+        <div class="styleguide">
+
+          <div class="sg-form">
+            <h2 class="section-title">Style guide</h2>
+            <p class="section-copy">We're created this style for you based on your logos, colors and fonts. Customize it as you wish, and preset all your branding styles in order to create a consistent look across landing pages and emails.</p>
+            <button class="btn btn-filled" id="previewTemplateBtn">Preview style in a template</button>
+
+            <h3 class="sub-title" style="margin-top:30px">Colors</h3>
+            <div class="sg-colors">
+              <label class="sg-color-row"><span>Background color</span>
+                <input type="color" class="color-chip" id="cBackground" value="#F0F0F0"></label>
+              <label class="sg-color-row"><span>Link color</span>
+                <input type="color" class="color-chip" id="cLink" value="#006CEB"></label>
+              <label class="sg-color-row"><span>Text color</span>
+                <input type="color" class="color-chip" id="cText" value="#000000"></label>
+              <label class="sg-color-row"><span>Link hover color</span>
+                <input type="color" class="color-chip" id="cLinkHover" value="#0060D1"></label>
+            </div>
+
+            <div class="rule"></div>
+
+            <h3 class="sub-title">Text styles</h3>
+            <div class="field field-wide combo" id="sgFamilyCombo">
+              <label for="sgFamily">Font family</label>
+              <input id="sgFamily" type="text" role="combobox" aria-expanded="false"
+                     aria-controls="sgFamilyList" aria-autocomplete="list" value="Roboto" autocomplete="off">
+              <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <div class="combo-list" id="sgFamilyList" role="listbox" hidden></div>
+            </div>
+
+            <div class="chips" id="levelChips">
+              <button class="chip" data-level="h1" aria-pressed="true">Heading 1</button>
+              <button class="chip" data-level="h2" aria-pressed="false">Heading 2</button>
+              <button class="chip" data-level="h3" aria-pressed="false">Heading 3</button>
+              <button class="chip" data-level="h4" aria-pressed="false">Heading 4</button>
+              <button class="chip" data-level="body" aria-pressed="false">Body</button>
+            </div>
+
+            <div class="field field-wide combo" id="levelFontCombo">
+              <label for="levelFont">Fonts</label>
+              <input id="levelFont" type="text" role="combobox" aria-expanded="false"
+                     aria-controls="levelFontList" aria-autocomplete="list" value="Roboto" autocomplete="off">
+              <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <div class="combo-list" id="levelFontList" role="listbox" hidden></div>
+            </div>
+
+            <div class="row">
+              <div class="field field-sm">
+                <label for="levelWeight">Weights</label>
+                <select id="levelWeight">
+                  <option value="300">Light</option>
+                  <option value="400">Regular</option>
+                  <option value="500">Medium</option>
+                  <option value="600">Semibold</option>
+                  <option value="700" selected>Bold</option>
+                </select>
+                <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </div>
+              <button class="icon-toggle" id="alignLeft" aria-pressed="true" aria-label="Align left">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6.5h16M4 11h10M4 15.5h16M4 20h10"/></svg>
+              </button>
+              <button class="icon-toggle" id="alignJustify" aria-pressed="false" aria-label="Justify">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6.5h16M4 11h16M4 15.5h16M4 20h16"/></svg>
+              </button>
+            </div>
+
+            <h3 class="sub-title" style="margin-top:32px">Links</h3>
+            <label class="check"><input type="checkbox" id="linkUnderline"><span>Add underline on the link</span></label>
+            <label class="check"><input type="checkbox" id="linkUnderlineHover"><span>Show underline on the link when hover</span></label>
+
+            <div class="rule"></div>
+
+            <h3 class="sub-title">Buttons</h3>
+            <div class="sg-colors" style="max-width:460px">
+              <label class="sg-color-row"><span>Primary fill</span>
+                <input type="color" class="color-chip" id="cBtnPrimary" value="#36A635"></label>
+              <label class="sg-color-row"><span>Secondary outline</span>
+                <input type="color" class="color-chip" id="cBtnSecondary" value="#36A635"></label>
+            </div>
+            <div class="row">
+              <div class="field field-sm">
+                <label for="btnRadius">Corner radius</label>
+                <select id="btnRadius">
+                  <option value="0">Square</option>
+                  <option value="4" selected>Rounded (4px)</option>
+                  <option value="8">Rounded (8px)</option>
+                  <option value="20">Pill</option>
+                </select>
+                <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- live preview -->
+          <aside class="sg-preview">
+            <h2 class="sg-preview-title">Style Preview</h2>
+            <div class="preview-card" id="previewCard">
+
+              <div class="pv-group">
+                <div class="pv-head">Colors</div>
+                <div class="pv-colors">
+                  <div><div class="pv-color-label">Background</div><div class="pv-swatch" id="pvBackground">#F0F0F0</div></div>
+                  <div><div class="pv-color-label">Text color</div><div class="pv-swatch" id="pvText">#000000</div></div>
+                  <div><div class="pv-color-label">Link color</div><div class="pv-swatch" id="pvLink">#006CEB</div></div>
+                  <div><div class="pv-color-label">Link hover color</div><div class="pv-swatch" id="pvLinkHover">#0060D1</div></div>
+                </div>
+              </div>
+
+              <div class="pv-group">
+                <div class="pv-head">Text Styles</div>
+                <div class="pv-text">
+                  <div>
+                    <div class="pv-h1" data-pv="h1">H1 Heading 1</div>
+                    <div class="pv-h2" data-pv="h2">H2 Heading 2</div>
+                    <div class="pv-h3" data-pv="h3">H3 Heading 3</div>
+                    <div class="pv-h4" data-pv="h4">H4 Heading 4</div>
+                  </div>
+                  <div class="pv-body" data-pv="body">Welcome to Branding Center! This is a placeholder paragraph that gives you an idea of how content will be laid out. As you fill in the details, your brand will automatically update across all your assets. <a href="#" id="pvLearnMore">Learn more</a> on best practices for building a strong, cohesive brand.</div>
+                </div>
+              </div>
+
+              <div class="pv-group">
+                <div class="pv-head">Button Styles</div>
+                <div class="pv-buttons">
+                  <div class="pv-btn-col"><div class="pv-color-label">Primary</div><span class="pv-btn primary" id="pvBtnPrimary">Button</span></div>
+                  <div class="pv-btn-col"><div class="pv-color-label">Secondary</div><span class="pv-btn secondary" id="pvBtnSecondary">Button</span></div>
+                  <div class="pv-btn-col"><div class="pv-color-label">Tertiary</div><span class="pv-btn tertiary" id="pvBtnTertiary">Button</span></div>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- --------------------------- SYNCED BLOCK --------------------------- -->
+      <section class="panel" id="panel-synced" role="tabpanel" aria-labelledby="tab-synced" hidden>
+        <div class="sb-head">
+          <div>
+            <h2 class="section-title">Synced block</h2>
+            <p class="section-copy" style="margin-bottom:0">Create or manage synced blocks that will automatically update across multiple landing pages and emails for consistent branding and messaging.</p>
+          </div>
+          <button class="btn btn-filled" id="addSyncedBtn" style="flex:0 0 auto">Add a synced block</button>
+        </div>
+
+        <div class="sb-toolbar">
+          <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+            <input type="search" id="sbSearch" placeholder="Search Synced block" aria-label="Search Synced block">
+          </div>
+          <button class="filter-btn" id="sbFilter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
+            Filter
+          </button>
+        </div>
+
+        <div class="sb-grid" id="sbGrid"></div>
+        <nav class="pager" id="sbPager" aria-label="Synced block pages"></nav>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* =================================================================
+   Helpers
+   ================================================================= */
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+
+let toastTimer;
+function toast(msg){
+  const t=$("#toast");
+  t.textContent=msg; t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove("show"),2200);
+}
+
+/* Relative luminance → pick readable foreground for a swatch. */
+function readableOn(hex){
+  const h=hex.replace("#","");
+  const n=h.length===3 ? h.split("").map(c=>c+c).join("") : h;
+  const [r,g,b]=[0,2,4].map(i=>parseInt(n.slice(i,i+2),16)/255);
+  const lin=c=>c<=.03928 ? c/12.92 : Math.pow((c+.055)/1.055,2.4);
+  const L=.2126*lin(r)+.7152*lin(g)+.0722*lin(b);
+  return L>.45 ? "rgba(0,0,0,.82)" : "#FFFFFF";
+}
+const up = hex => hex.toUpperCase();
+
+/* =================================================================
+   Tabs
+   ================================================================= */
+const tabs=$$(".tab");
+function selectTab(tab){
+  tabs.forEach(t=>{
+    const on = t===tab;
+    t.setAttribute("aria-selected", String(on));
+    $("#"+t.getAttribute("aria-controls")).hidden = !on;
+  });
+  tab.focus();
+}
+tabs.forEach(t=>t.addEventListener("click",()=>selectTab(t)));
+$(".tabs").addEventListener("keydown",e=>{
+  const i=tabs.indexOf(document.activeElement);
+  if(i<0) return;
+  if(e.key==="ArrowRight"){e.preventDefault();selectTab(tabs[(i+1)%tabs.length]);}
+  if(e.key==="ArrowLeft"){e.preventDefault();selectTab(tabs[(i-1+tabs.length)%tabs.length]);}
+});
+
+/* =================================================================
+   Font list (shared by all three comboboxes)
+   ================================================================= */
+const FONTS=[
+  "Roboto","Open Sans","Lato","Montserrat","Poppins",
+  "Merriweather","Playfair Display","Oswald",
+  "Arial","Helvetica","Georgia","Times New Roman","Courier New","Verdana"
+];
+
+function makeCombo(wrapSel, inputSel, listSel, onPick){
+  const wrap=$(wrapSel), input=$(inputSel), list=$(listSel);
+  let activeIdx=-1, options=[];
+
+  function render(filter){
+    const q=(filter||"").trim().toLowerCase();
+    options = q ? FONTS.filter(f=>f.toLowerCase().includes(q)) : FONTS.slice();
+    list.innerHTML="";
+    if(!options.length){
+      list.innerHTML='<div class="combo-empty">No matching fonts</div>';
+      return;
+    }
+    options.forEach((f,i)=>{
+      const b=document.createElement("button");
+      b.type="button"; b.className="combo-option"; b.setAttribute("role","option");
+      b.textContent=f;
+      b.style.fontFamily=`"${f}", sans-serif`;
+      b.setAttribute("aria-selected", String(f===input.value));
+      if(i===activeIdx) b.classList.add("is-active");
+      b.addEventListener("mousedown",e=>{e.preventDefault();pick(f);});
+      list.appendChild(b);
+    });
+  }
+  function open(){ list.hidden=false; input.setAttribute("aria-expanded","true"); }
+  function close(){ list.hidden=true; input.setAttribute("aria-expanded","false"); activeIdx=-1; }
+  function pick(f){ input.value=f; close(); onPick && onPick(f); }
+
+  input.addEventListener("focus",()=>{activeIdx=-1;render(input.value===placeholderValue(input)?"":"");open();});
+  input.addEventListener("input",()=>{activeIdx=-1;render(input.value);open();});
+  input.addEventListener("blur",()=>setTimeout(close,80));
+  input.addEventListener("keydown",e=>{
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+      e.preventDefault();
+      if(list.hidden){render(input.value);open();}
+      if(!options.length) return;
+      activeIdx = e.key==="ArrowDown"
+        ? (activeIdx+1)%options.length
+        : (activeIdx-1+options.length)%options.length;
+      render(input.value);
+      const el=list.children[activeIdx]; el && el.scrollIntoView({block:"nearest"});
+    } else if(e.key==="Enter"){
+      if(!list.hidden && activeIdx>-1){e.preventDefault();pick(options[activeIdx]);}
+    } else if(e.key==="Escape"){ close(); }
+  });
+  wrap.querySelector(".caret").addEventListener("mousedown",e=>{
+    e.preventDefault();
+    if(list.hidden){input.focus();render("");open();} else close();
+  });
+  function placeholderValue(){return "";}
+  return {input};
+}
+
+/* =================================================================
+   BRANDING — logos
+   ================================================================= */
+const WORDMARKS=[
+  {color:"#36A635", bg:"#F0F0F0"},
+  {color:"#000000", bg:"#F0F0F0"},
+  {color:"#FFFFFF", bg:"#EDEDED"}
+];
+let logos = WORDMARKS.map((w,i)=>({id:"logo-"+i, kind:"mark", ...w, primary:i===0}));
+
+function logoArt(l){
+  if(l.kind==="image") return `<img src="${l.src}" alt="">`;
+  return `<span class="wordmark" style="color:${l.color}">keap</span>`;
+}
+function renderLogos(){
+  const grid=$("#logoGrid");
+  $$(".logo-tile",grid).forEach(n=>n.remove());
+  const dz=$("#dropzone");
+  logos.forEach(l=>{
+    const tile=document.createElement("div");
+    tile.className="logo-tile"+(l.primary?" is-primary":"");
+    tile.style.background=l.bg||"#F0F0F0";
+    tile.dataset.id=l.id;
+    tile.innerHTML =
+      (l.primary?'<span class="tag">Primary</span>':"")+
+      logoArt(l)+
+      '<button class="remove" aria-label="Remove logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4.5 6.8h15M9.6 6.8V5a1.5 1.5 0 0 1 1.5-1.5h1.8A1.5 1.5 0 0 1 14.4 5v1.8M6.6 6.8l.8 12a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5l.8-12"/></svg></button>'+
+      '<button class="make-primary">Make primary</button>';
+    grid.insertBefore(tile,dz);
+  });
+}
+$("#logoGrid").addEventListener("click",e=>{
+  const tile=e.target.closest(".logo-tile");
+  if(!tile) return;
+  const id=tile.dataset.id;
+  if(e.target.closest(".remove")){
+    const wasPrimary = logos.find(l=>l.id===id)?.primary;
+    logos = logos.filter(l=>l.id!==id);
+    if(wasPrimary && logos.length) logos[0].primary=true;
+    renderLogos(); toast("Logo removed");
+    return;
+  }
+  logos.forEach(l=>l.primary = l.id===id);
+  renderLogos(); toast("Primary logo updated");
+});
+
+/* upload: browse + drag & drop */
+const dz=$("#dropzone"), fileInput=$("#logoInput");
+function addLogoFile(file){
+  if(!file || !/^image\//.test(file.type)){ toast("jpeg, png or tiff files only"); return; }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    logos.push({id:"logo-"+Date.now(), kind:"image", src:reader.result, bg:"#F0F0F0", primary:logos.length===0});
+    renderLogos(); toast(file.name+" uploaded");
+  };
+  reader.readAsDataURL(file);
+}
+dz.addEventListener("click",()=>fileInput.click());
+dz.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fileInput.click();}});
+fileInput.addEventListener("change",()=>{addLogoFile(fileInput.files[0]);fileInput.value="";});
+["dragenter","dragover"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("is-over");}));
+["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove("is-over");}));
+dz.addEventListener("drop",e=>addLogoFile(e.dataTransfer.files[0]));
+
+/* =================================================================
+   BRANDING — colors
+   ================================================================= */
+let colors=["#EBD559","#36A635","#490404","#585D72","#006CEB","#D7823B"];
+
+function renderColors(){
+  const grid=$("#swatchGrid");
+  $$(".swatch",grid).forEach(n=>n.remove());
+  const add=$("#addColorBtn");
+  colors.forEach((c,i)=>{
+    const s=document.createElement("div");
+    s.className="swatch"; s.style.background=c; s.dataset.index=i;
+    s.title="Click to copy "+up(c);
+    s.innerHTML =
+      `<span class="hex" style="color:${readableOn(c)}">${up(c)}</span>`+
+      '<button class="trash" aria-label="Remove color"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4.5 6.8h15M9.6 6.8V5a1.5 1.5 0 0 1 1.5-1.5h1.8A1.5 1.5 0 0 1 14.4 5v1.8M6.6 6.8l.8 12a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5l.8-12"/></svg></button>'+
+      '<span class="copied">Copied</span>';
+    grid.insertBefore(s,add);
+  });
+}
+$("#swatchGrid").addEventListener("click",e=>{
+  const sw=e.target.closest(".swatch");
+  if(!sw) return;
+  const i=Number(sw.dataset.index);
+  if(e.target.closest(".trash")){
+    colors.splice(i,1); renderColors(); toast("Color removed");
+    return;
+  }
+  const hex=up(colors[i]);
+  const done=()=>{sw.classList.add("is-copied");setTimeout(()=>sw.classList.remove("is-copied"),800);};
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(hex).then(done).catch(done);
+  } else { done(); }
+});
+const colorInput=$("#colorInput");
+$("#addColorBtn").addEventListener("click",()=>colorInput.click());
+colorInput.addEventListener("change",()=>{
+  colors.push(up(colorInput.value));
+  renderColors(); toast(up(colorInput.value)+" added to your brand colors");
+});
+
+/* brand font combobox */
+makeCombo("#brandFontCombo","#brandFont","#brandFontList",f=>toast(f+" set as your brand font"));
+
+/* =================================================================
+   STYLE GUIDE — state + live preview
+   ================================================================= */
+const style={
+  background:"#F0F0F0", text:"#000000", link:"#006CEB", linkHover:"#0060D1",
+  family:"Roboto",
+  levels:{
+    h1:{font:"Roboto",weight:"700",align:"left"},
+    h2:{font:"Roboto",weight:"700",align:"left"},
+    h3:{font:"Roboto",weight:"500",align:"left"},
+    h4:{font:"Roboto",weight:"500",align:"left"},
+    body:{font:"Roboto",weight:"400",align:"left"}
+  },
+  underline:false, underlineHover:false,
+  btnPrimary:"#36A635", btnSecondary:"#36A635", btnRadius:"4"
+};
+let activeLevel="h1";
+
+function paintPreview(){
+  // colors
+  const map={pvBackground:"background",pvText:"text",pvLink:"link",pvLinkHover:"linkHover"};
+  Object.entries(map).forEach(([id,key])=>{
+    const el=$("#"+id), hex=up(style[key]);
+    el.style.background=hex; el.style.color=readableOn(hex); el.textContent=hex;
+  });
+
+  // surface + text
+  $("#previewCard").style.background=style.background;
+  $$("[data-pv]").forEach(el=>{
+    const lv=style.levels[el.dataset.pv];
+    el.style.fontFamily=`"${lv.font||style.family}", sans-serif`;
+    el.style.fontWeight=lv.weight;
+    el.style.textAlign=lv.align;
+    el.style.color=style.text;
+  });
+
+  // links
+  const a=$("#pvLearnMore");
+  a.style.color=style.link;
+  a.style.textDecoration = style.underline ? "underline" : "none";
+  a.onmouseenter=()=>{a.style.color=style.linkHover; if(style.underlineHover) a.style.textDecoration="underline";};
+  a.onmouseleave=()=>{a.style.color=style.link; a.style.textDecoration = style.underline?"underline":"none";};
+
+  // buttons
+  const r=style.btnRadius+"px";
+  const p=$("#pvBtnPrimary"), s=$("#pvBtnSecondary"), t=$("#pvBtnTertiary");
+  p.style.background=style.btnPrimary; p.style.color=readableOn(style.btnPrimary); p.style.borderRadius=r;
+  s.style.borderColor=style.btnSecondary; s.style.color=style.btnSecondary; s.style.borderRadius=r;
+  t.style.color=style.btnSecondary;
+}
+
+function syncLevelControls(){
+  const lv=style.levels[activeLevel];
+  $("#levelFont").value=lv.font;
+  $("#levelWeight").value=lv.weight;
+  $("#alignLeft").setAttribute("aria-pressed", String(lv.align==="left"));
+  $("#alignJustify").setAttribute("aria-pressed", String(lv.align==="justify"));
+}
+
+// colour inputs
+[["#cBackground","background"],["#cText","text"],["#cLink","link"],
+ ["#cLinkHover","linkHover"],["#cBtnPrimary","btnPrimary"],["#cBtnSecondary","btnSecondary"]]
+ .forEach(([sel,key])=>{
+   $(sel).addEventListener("input",e=>{style[key]=up(e.target.value);paintPreview();});
+ });
+
+// global family → applies to every level that hasn't been overridden individually
+makeCombo("#sgFamilyCombo","#sgFamily","#sgFamilyList",f=>{
+  style.family=f;
+  Object.values(style.levels).forEach(lv=>lv.font=f);
+  syncLevelControls(); paintPreview();
+});
+// per-level font
+makeCombo("#levelFontCombo","#levelFont","#levelFontList",f=>{
+  style.levels[activeLevel].font=f; paintPreview();
+});
+
+// level chips
+$("#levelChips").addEventListener("click",e=>{
+  const chip=e.target.closest(".chip"); if(!chip) return;
+  activeLevel=chip.dataset.level;
+  $$("#levelChips .chip").forEach(c=>c.setAttribute("aria-pressed", String(c===chip)));
+  syncLevelControls();
+});
+
+$("#levelWeight").addEventListener("change",e=>{
+  style.levels[activeLevel].weight=e.target.value; paintPreview();
+});
+$("#alignLeft").addEventListener("click",()=>{
+  style.levels[activeLevel].align="left"; syncLevelControls(); paintPreview();
+});
+$("#alignJustify").addEventListener("click",()=>{
+  style.levels[activeLevel].align="justify"; syncLevelControls(); paintPreview();
+});
+$("#linkUnderline").addEventListener("change",e=>{style.underline=e.target.checked;paintPreview();});
+$("#linkUnderlineHover").addEventListener("change",e=>{style.underlineHover=e.target.checked;paintPreview();});
+$("#btnRadius").addEventListener("change",e=>{style.btnRadius=e.target.value;paintPreview();});
+$("#previewTemplateBtn").addEventListener("click",()=>toast("Opening a template with your style applied…"));
+
+/* =================================================================
+   SYNCED BLOCK
+   ================================================================= */
+const BLOCKS=[
+  {title:"Landing page Heading", usage:"12 landing pages", art:"heading"},
+  {title:"Email Footer",         usage:"38 emails",       art:"footer"},
+  {title:"Landing page Footer",  usage:"8 landing pages", art:"links"},
+  {title:"Contact us",           usage:"5 landing pages, 58 emails", art:"contact"},
+  {title:"Company Intro",        usage:"5 landing pages, 58 emails", art:"intro"},
+  {title:"Product Intro",        usage:"5 landing pages, 58 emails", art:"product"}
+];
+
+/* Lightweight CSS-only artwork stands in for the real block thumbnails. */
+function art(kind){
+  switch(kind){
+    case "heading": return `<div class="art" style="background:#16181B;display:grid;place-items:center">
+      <div style="font-family:Georgia,serif;font-style:italic;color:#fff;font-size:30px">custom</div></div>`;
+    case "footer": return `<div class="art" style="background:#C9C9C9"></div>`;
+    case "links": return `<div class="art" style="background:#2B50C8;padding:14px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px 18px">
+      ${Array.from({length:12}).map(()=>'<div style="height:6px;background:rgba(255,255,255,.55);border-radius:3px"></div>').join("")}</div>`;
+    case "contact": return `<div class="art" style="background:#FBF3F5;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px">
+      ${["Sales team","Support"].map(t=>`<div style="text-align:center">
+        <div style="font-weight:700;font-size:13px;color:#13343B;margin-bottom:8px">${t}</div>
+        <div style="height:6px;background:#D9E2E4;border-radius:3px;margin-bottom:5px"></div>
+        <div style="height:6px;background:#D9E2E4;border-radius:3px;width:80%;margin:0 auto 10px"></div>
+        <div style="background:#1F4B50;color:#fff;font-size:10px;padding:6px;border-radius:2px">Contact</div></div>`).join("")}</div>`;
+    case "intro": return `<div class="art" style="background:#EDEAE6;display:flex">
+      <div style="width:46%;background:#F26A1B;padding:10px"><div style="height:6px;background:rgba(255,255,255,.8);border-radius:3px;width:80%"></div></div>
+      <div style="flex:1;background:linear-gradient(120deg,#8C8F96,#4A4E57)"></div></div>`;
+    case "product": return `<div class="art" style="background:#fff;display:flex">
+      <div style="width:44%;padding:14px"><div style="display:inline-block;background:#E9C46A;font-size:9px;padding:3px 7px;border-radius:2px;margin-bottom:8px">RECIPES</div>
+      ${Array.from({length:3}).map(()=>'<div style="height:5px;background:#DDD;border-radius:3px;margin-bottom:5px"></div>').join("")}</div>
+      <div style="flex:1;background:radial-gradient(circle at 40% 45%,#E8862A,#B14D18)"></div></div>`;
+    default: return '<div class="art"></div>';
+  }
+}
+
+const PER_PAGE=6;
+let sbQuery="", sbPage=1;
+
+function filtered(){
+  const q=sbQuery.trim().toLowerCase();
+  // 5 pages of results stand behind the pager; page 1 holds the real content.
+  return q ? BLOCKS.filter(b=>b.title.toLowerCase().includes(q)) : BLOCKS;
+}
+
+function renderBlocks(){
+  const grid=$("#sbGrid");
+  const rows=filtered();
+  grid.innerHTML="";
+  if(!rows.length){
+    grid.innerHTML='<p class="empty">No synced blocks match “'+sbQuery+'”.</p>';
+    renderPager(0); return;
+  }
+  rows.forEach((b,i)=>{
+    const card=document.createElement("article");
+    card.className="sb-card"; card.style.position="relative";
+    card.innerHTML=`
+      <div class="sb-card-head">
+        <div class="meta"><h3>${b.title}</h3><p>${b.usage}</p></div>
+        <button class="kebab" aria-label="More options for ${b.title}" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg>
+        </button>
+        <div class="menu" hidden>
+          <button data-act="Edit">Edit</button>
+          <button data-act="Duplicate">Duplicate</button>
+          <button data-act="Rename">Rename</button>
+          <button data-act="Delete" class="danger">Delete</button>
+        </div>
+      </div>
+      <div class="sb-thumb">
+        ${art(b.art)}
+        <div class="sb-overlay">
+          <button class="btn btn-filled" data-act="Edit">Edit</button>
+          <button class="preview-link" data-act="Preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/></svg>
+            Preview
+          </button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  renderPager(5);
+}
+
+function renderPager(pages){
+  const p=$("#sbPager"); p.innerHTML="";
+  if(pages<2) return;
+  const arrow=(dir,disabled)=>{
+    const b=document.createElement("button");
+    b.innerHTML = dir==="prev"
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg>';
+    b.setAttribute("aria-label", dir==="prev"?"Previous page":"Next page");
+    if(disabled) b.disabled=true;
+    else b.addEventListener("click",()=>{sbPage += dir==="prev"?-1:1;renderBlocks();});
+    return b;
+  };
+  p.appendChild(arrow("prev", sbPage===1));
+  for(let i=1;i<=pages;i++){
+    const b=document.createElement("button");
+    b.textContent=i;
+    if(i===sbPage) b.setAttribute("aria-current","page");
+    b.addEventListener("click",()=>{sbPage=i;renderBlocks();});
+    p.appendChild(b);
+  }
+  p.appendChild(arrow("next", sbPage===pages));
+}
+
+$("#sbGrid").addEventListener("click",e=>{
+  const kebab=e.target.closest(".kebab");
+  if(kebab){
+    const menu=kebab.nextElementSibling;
+    const open=menu.hidden;
+    $$("#sbGrid .menu").forEach(m=>m.hidden=true);
+    $$("#sbGrid .kebab").forEach(k=>k.setAttribute("aria-expanded","false"));
+    menu.hidden=!open;
+    kebab.setAttribute("aria-expanded", String(open));
+    return;
+  }
+  const act=e.target.closest("[data-act]");
+  if(act){
+    const title=act.closest(".sb-card").querySelector("h3").textContent;
+    $$("#sbGrid .menu").forEach(m=>m.hidden=true);
+    toast(act.dataset.act+" — "+title);
+  }
+});
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".sb-card-head")) $$("#sbGrid .menu").forEach(m=>m.hidden=true);
+});
+
+$("#sbSearch").addEventListener("input",e=>{sbQuery=e.target.value;sbPage=1;renderBlocks();});
+$("#sbFilter").addEventListener("click",()=>toast("Filter panel would open here"));
+$("#addSyncedBtn").addEventListener("click",()=>toast("New synced block"));
+
+/* =================================================================
+   Boot
+   ================================================================= */
+renderLogos();
+renderColors();
+syncLevelControls();
+paintPreview();
+renderBlocks();
+
+})();
+</script>
+</body>
+</html>
