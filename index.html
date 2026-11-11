@@ -76,8 +76,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;
 .sc{position:relative;display:flex;flex-direction:column;height:100vh;height:100dvh}
 .sc :focus-visible{outline:2px solid var(--sc-accent-light);outline-offset:2px}
 .sc-bar{flex:none;height:60px;display:flex;align-items:center;gap:14px;padding:0 20px}
-.sc-back{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 8px;border-radius:999px;border:1px solid var(--sc-rule);color:var(--sc-muted);font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s,border-color .2s,background .2s}
-.sc-back:hover{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}
 .sc-title{font-family:var(--sc-display);font-weight:800;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
 .sc-title small{display:block;font-family:var(--sc-font);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sc-subtle);margin-top:1px}
 .sc-grow{flex:1}
@@ -734,7 +732,6 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;
 <body>
 <div class="sc">
   <header class="sc-bar">
-    <a class="sc-back" href="https://dbyxdesign.com/case-branding-center.html"><span data-icon="arrowLeft" data-size="16"></span>Case study</a>
     <div class="sc-title">Branding Center with AI<small>Interactive prototype</small></div>
     <span class="sc-grow"></span>
     <button class="sc-pill ghost sm" data-act="restart"><span data-icon="refresh" data-size="15"></span>Start over</button>
